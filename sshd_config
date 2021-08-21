@@ -1,0 +1,12 @@
+# Disable password authentication forcing use of keys
+PasswordAuthentication no
+
+# Disable Root Logins
+PermitRootLogin no
+
+# Configure Idle Timeout Interval
+ClientAliveInterval 360
+ClientAliveCountMax 0
+
+# Disable Empty Passwords
+PermitEmptyPasswords no
