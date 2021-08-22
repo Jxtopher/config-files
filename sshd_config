@@ -5,7 +5,7 @@ PasswordAuthentication no
 PermitRootLogin no
 
 # Configure Idle Timeout Interval
-ClientAliveInterval 360
+ClientAliveInterval 3600
 ClientAliveCountMax 0
 
 # Disable Empty Passwords
