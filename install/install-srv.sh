@@ -33,6 +33,11 @@ if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
   chmod 440 /etc/sudoers
 
   if ! [ -z "$RSA_KEY_PUB" ] ; then
+    # sshd
+    apt-get -qq install -y openssh-server
+    wget -nv $URI/sshd_config -O /etc/sshd_config
+    systemctl restart sshd
+
     PATH_AUTHORIZED_KEYS="/home/$USER/.ssh/authorized_keys"
     if [ ! -f $PATH_AUTHORIZED_KEYS ]; then
         mkdir -p "/home/$USER/.ssh/" && touch $PATH_AUTHORIZED_KEYS
@@ -45,11 +50,6 @@ if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
 else
   >&2 echo "[-] User $USER not found"
 fi
-
-# sshd
-apt-get -qq install -y openssh-server
-wget -nv $URI/sshd_config -O /etc/sshd_config
-systemctl restart sshd
 
 # nftables
 wget -nv $URI/nftables.conf -O /etc/nftables.conf
