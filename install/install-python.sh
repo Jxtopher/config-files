@@ -2,7 +2,7 @@
 
 ## Installing the packages
 sudo apt-get update
-sudo apt-get install build-essential liblzma-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev uuid-dev libdb5.3-dev libexpat1-dev uuid-dev libncursesw5-dev libreadline-dev tk-dev 
+sudo apt-get install -y build-essential liblzma-dev zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libsqlite3-dev libreadline-dev libffi-dev curl libbz2-dev uuid-dev libdb5.3-dev libexpat1-dev uuid-dev libncursesw5-dev libreadline-dev tk-dev 
 
 ## Download, complie, install
 cd /tmp
