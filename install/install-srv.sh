@@ -16,11 +16,6 @@ if ! [[ "$VERSION_ID" =~ ^(11|10)$ ]] || ! [ "$ID" = 'debian' ] ; then
   exit 1
 fi
 
-if [ "$USER" = "" ] || ! grep -q "$USER:" /etc/passwd ; then
-  >&2 echo "[-] User not fond"
-  exit 1
-fi
-
 # Install screen
 sudo apt-get install -y screen
 wget $(URI)/.screenrc -O /etc/screenrc
@@ -30,18 +25,26 @@ apt-get install -y vim
 wget $(URI)/vimrc -O /etc/vimrc
 
 # Privilage
-apt-get install -y sudo
-PATH_AUTHORIZED_KEYS="/home/$USER/.ssh/authorized_keys"
-if [ ! -f $PATH_AUTHORIZED_KEYS ]; then
-    mkdir -p "/home/$USER/.ssh/" && touch $PATH_AUTHORIZED_KEYS
-fi
+if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
+  apt-get install -y sudo
 
-if ! grep -q "$RSA_KEY_PUB" $PATH_AUTHORIZED_KEYS ; then
-  echo $RSA_KEY_PUB > /home/chris/.ssh/authorized_keys
+  chmod 660 /etc/sudoers
+  echo "$USER   ALL=(ALL:ALL) ALL" > /etc/sudoers
+  chmod 440 /etc/sudoers
+
+  if ! [ -z "$RSA_KEY_PUB" ] ; then
+    PATH_AUTHORIZED_KEYS="/home/$USER/.ssh/authorized_keys"
+    if [ ! -f $PATH_AUTHORIZED_KEYS ]; then
+        mkdir -p "/home/$USER/.ssh/" && touch $PATH_AUTHORIZED_KEYS
+    fi
+
+    if ! grep -q "$RSA_KEY_PUB" $PATH_AUTHORIZED_KEYS ; then
+      echo $RSA_KEY_PUB > /home/chris/.ssh/authorized_keys
+    fi
+  fi
+else
+  >&2 echo "[-] User $USER not found"
 fi
-chmod 660 /etc/sudoers
-echo "$USER   ALL=(ALL:ALL) ALL" > /etc/sudoers
-chmod 440 /etc/sudoers
 
 # sshd
 apt-get install -y openssh-server
