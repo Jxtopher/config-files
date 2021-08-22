@@ -18,11 +18,11 @@ fi
 
 # Install screen
 sudo apt-get install -y screen
-wget $(URI)/.screenrc -O /etc/screenrc
+wget $URI/.screenrc -O /etc/screenrc
 
 # vim
 apt-get install -y vim
-wget $(URI)/vimrc -O /etc/vimrc
+wget $URI/vimrc -O /etc/vimrc
 
 # Privilage
 if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
@@ -48,11 +48,11 @@ fi
 
 # sshd
 apt-get install -y openssh-server
-wget $(URI)/sshd_config -O /etc/sshd_config
+wget $URI/sshd_config -O /etc/sshd_config
 systemctl restart sshd
 
 # nftables
-wget $(URI)/nftables.conf -O /etc/nftables.conf
+wget $URI/nftables.conf -O /etc/nftables.conf
 systemctl restart nftables
 
 # Information
