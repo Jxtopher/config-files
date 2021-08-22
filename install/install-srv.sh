@@ -17,16 +17,16 @@ if ! [[ "$VERSION_ID" =~ ^(11|10)$ ]] || ! [ "$ID" = 'debian' ] ; then
 fi
 
 # Install screen
-sudo apt-get install -y screen
+sudo apt-get -qq install -y screen
 wget -nv $URI/.screenrc -O /etc/screenrc
 
 # vim
-apt-get install -y vim
+apt-get -qq install -y vim
 wget -nv $URI/vimrc -O /etc/vimrc
 
 # Privilage
 if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
-  apt-get install -y sudo
+  apt-get -qq install -y sudo
 
   chmod 660 /etc/sudoers
   echo "$USER   ALL=(ALL:ALL) ALL" > /etc/sudoers
@@ -47,7 +47,7 @@ else
 fi
 
 # sshd
-apt-get install -y openssh-server
+apt-get -qq install -y openssh-server
 wget -nv $URI/sshd_config -O /etc/sshd_config
 systemctl restart sshd
 
