@@ -35,7 +35,7 @@ if ! [ -z "$USER" ] && grep -q "$USER:" /etc/passwd ; then
   if ! [ -z "$RSA_KEY_PUB" ] ; then
     # sshd
     apt-get -qq install -y openssh-server
-    wget -nv $URI/sshd_config -O /etc/sshd_config
+    wget -nv $URI/sshd_config -O /etc/ssh/sshd_config
     systemctl restart sshd
 
     PATH_AUTHORIZED_KEYS="/home/$USER/.ssh/authorized_keys"
