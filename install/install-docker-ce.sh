@@ -17,4 +17,4 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 
 # Create user docker
-/usr/sbin/useradd -r -s  /bin/false docker
+/usr/sbin/useradd -r -s  /bin/bash docker
