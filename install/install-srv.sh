@@ -17,7 +17,7 @@ if ! [[ "$VERSION_ID" =~ ^(11|10)$ ]] || ! [ "$ID" = 'debian' ] ; then
 fi
 
 # Install screen
-sudo apt-get -qq install -y screen
+apt-get -qq install -y screen
 wget -nv $URI/.screenrc -O /etc/screenrc
 
 # vim
