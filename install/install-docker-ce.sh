@@ -1,5 +1,5 @@
 
-# OS Check
+# OS Check: Debian 11
 source /etc/os-release
 if ! [[ "$VERSION_ID" =~ ^(11)$ ]] || ! [ "$ID" = 'debian' ] ; then
   >&2 echo "[-] Bad os version, only debian 10 and 10"
