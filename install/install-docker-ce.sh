@@ -1,3 +1,12 @@
+
+# OS Check
+source /etc/os-release
+if ! [[ "$VERSION_ID" =~ ^(11)$ ]] || ! [ "$ID" = 'debian' ] ; then
+  >&2 echo "[-] Bad os version, only debian 10 and 10"
+  exit 1
+fi
+
+
 # Docker-ce engine
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https ca-certificates curl  gnupg lsb-release
